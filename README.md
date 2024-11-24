@@ -9,3 +9,4 @@ This requires a port number as an argument from 0 to 65535
 Make me executable  
 ```chmod +x port_killer.sh```
 
+Or add me to ```$PATH```
