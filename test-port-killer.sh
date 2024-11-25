@@ -1,18 +1,22 @@
 #!/bin/bash
 
-if [ "$#" -ne 1 ]; then
-    echo "Need port (0-65535)"
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 port1 [port2 ... portN]"
     exit 1
 fi
 
-port=$1
+openPort() {
+    p=$1
 
-if ! [[ "$port" =~ ^[0-9]+$ ]] || [ "$port" -lt 0 ] || [ "$port" -gt 65535 ]; then
-    echo "Port :$port is not valid (0-65535)"
-    exit 1
-fi
+    if ! [[ "$p" =~ ^[0-9]+$ ]] || [ "$p" -lt 0 ] || [ "$p" -gt 65535 ]; then
+        echo ":$p is not valid (0-65535)"
+        return
+    fi
 
-echo "Opening port :$port in detached mode..."
-nohup nc -lk -p "$port" >/dev/null 2>&1 &
+    nohup nc -lk -p "$port" >/dev/null 2>&1 &
+    echo ":$p is open"
+}
 
-echo "Port :$port is now open"
+for port in "$@"; do
+    openPort "$port"
+done

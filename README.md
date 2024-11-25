@@ -3,8 +3,8 @@ Simple port killer Bash script
 
 Need ```lsof``` command
 
-This requires a port number as an argument from 0 to 65535  
-```./port_killer.sh 8080```
+This requires n port number as argument from 0 to 65535  
+```./port_killer.sh port1 [port2 ... portN] ```
 
 Make me executable  
 ```chmod +x port_killer.sh```
